@@ -22,9 +22,7 @@ public class PlayerInput : MonoBehaviour
 		
 		if (Input.GetButtonDown("Fall"))
 		{
-			playerMovement.StartGravityShift(
-				(childCamera.transform.forward * playerMovement.DefaultGravityMagnitude),
-				childCamera.transform.rotation);
+			playerMovement.StartGravityShift(childCamera.transform.forward * playerMovement.DefaultGravityMagnitude);
 		}
 		
 		if (Input.GetButtonDown("Cancel Gravity"))

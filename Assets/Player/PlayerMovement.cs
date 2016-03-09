@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	public Quaternion DesiredBodyOrientation { get; private set; }
 	public Vector3 DesiredGravityAcceleration { get; private set; }
 
-	public bool DebugRenderGravityShiftGhost = false;
+	public bool DebugEnabled = false;
 	
 	public void Awake ()
 	{
@@ -27,20 +27,18 @@ public class PlayerMovement : MonoBehaviour
 	{
 		ApplyLocalGravity();
 
-		if (DebugRenderGravityShiftGhost)
+		if (DebugEnabled)
 		{
 			RenderGravityShiftGhost();
 		}
 	}
 
 	public void StartGravityShift(
-		Vector3 desiredGravityAcceleration,
-		Quaternion currentCameraOrientation)
+		Vector3 desiredGravityAcceleration)
 	{
 		DesiredGravityAcceleration = desiredGravityAcceleration;
 
-		DesiredBodyOrientation = 
-			BuildGravityShiftBodyOrientation(desiredGravityAcceleration, currentCameraOrientation);
+		DesiredBodyOrientation = BuildGravityShiftBodyOrientation(desiredGravityAcceleration);
 
 		// Full-stop so we stay aligned with the transition-effect.
 		playerRigidbody.velocity = Vector3.zero;
@@ -56,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
 		DesiredGravityAcceleration = Vector3.zero;
 		DesiredBodyOrientation = transform.rotation;
+		
+		playerRigidbody.velocity = Vector3.zero;
 	}
 
 	public void OnCollisionEnter (
@@ -63,10 +63,18 @@ public class PlayerMovement : MonoBehaviour
 	{
 		ContactPoint contactPoint = collision.contacts[0];
 
+		Quaternion oldBodyOrientation = transform.rotation;
+
 		// TODO Refactor this so we're not having to abuse the public-API.
-		StartGravityShift(
-			(-1 * contactPoint.normal),
-			GetComponentInChildren<Camera>().transform.rotation);
+		StartGravityShift(-1 * contactPoint.normal);
+
+		if (DebugEnabled)
+		{
+			Debug.LogFormat(
+				"Collision with normal {0} rotated us by {1}.",
+				contactPoint.normal,
+				(Quaternion.Inverse(oldBodyOrientation) * transform.rotation).eulerAngles);
+		}
 	}
 
 	private Rigidbody playerRigidbody = null;
@@ -77,23 +85,15 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 	private Quaternion BuildGravityShiftBodyOrientation (
-		Vector3 desiredGravityAcceleration,
-		Quaternion currentCameraOrientation)
+		Vector3 desiredGravityAcceleration)
 	{
 		Vector3 currentDownVector = (transform.rotation * Vector3.down);
-
+		
 		// Our new body orientation _must_ be matched to the new gravity vector, but other than that we want to
-		// as closely as possible match our current camera orientation. This is the opposite prioritization of the
-		// implementation of LookRotation(), hence we flip its inputs and then rotate the output.
-		Quaternion bodyOrientationInCurrentGravityFacingTowardsCamera = (
-			Quaternion.LookRotation(currentDownVector, (currentCameraOrientation * Vector3.forward)) *
-			Quaternion.Euler(-90, 0, 0));
-
-		// From the old reference frame to the new, rotate the shortest quaternion-distance possible, thus also
-		// minimizing any changes to the prior torso-facing in the real world.
+		// as closely as possible match our current camera orientation. 
 		Quaternion desiredBodyOrientation = (
 			Quaternion.FromToRotation(currentDownVector, desiredGravityAcceleration) *
-			bodyOrientationInCurrentGravityFacingTowardsCamera);
+			transform.rotation);
 
 		return desiredBodyOrientation;
 	}
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 		Camera childCamera = GetComponentInChildren<Camera>();
 
 		Quaternion ghostBodyOrientation = 
-			BuildGravityShiftBodyOrientation(childCamera.transform.forward, childCamera.transform.rotation);
+			BuildGravityShiftBodyOrientation(childCamera.transform.forward);
 
 		Debug.DrawLine(
 			transform.position, 

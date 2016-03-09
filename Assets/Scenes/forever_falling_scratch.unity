@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultGravityMagnitude: 10
-  DebugRenderGravityShiftGhost: 0
+  DebugEnabled: 1
 --- !u!114 &364750252
 MonoBehaviour:
   m_ObjectHideFlags: 0
