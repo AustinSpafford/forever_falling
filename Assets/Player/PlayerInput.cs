@@ -3,17 +3,17 @@ using System.Collections;
 
 public class PlayerInput : MonoBehaviour
 {
-	public void Awake ()
+	public void Awake()
 	{
 		childCamera = GetComponentInChildren<Camera>();
 		playerMovement = GetComponent<PlayerMovement>();
 	}
 
-	public void Start ()
+	public void Start()
 	{
 	}
 	
-	public void Update ()
+	public void Update()
 	{
 		if (Input.GetButtonDown("Recenter HMD"))
 		{

@@ -294,7 +294,7 @@ GameObject:
   - 114: {fileID: 525747435}
   m_Layer: 0
   m_Name: Right Eye Camera
-  m_TagString: Untagged
+  m_TagString: Portal - Right Eye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -753,6 +753,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1065137260}
   - 81: {fileID: 1065137261}
+  - 114: {fileID: 1065137262}
   m_Layer: 0
   m_Name: Portal Camera
   m_TagString: Untagged
@@ -766,7 +767,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1065137259}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.6600439, y: 0.0026310538, z: -0.0028157197, w: 0.7512172}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -781,6 +782,18 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1065137259}
   m_Enabled: 0
+--- !u!114 &1065137262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1065137259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e54daa8a29b51b40a1b1c591a9b0cb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugEnabled: 0
 --- !u!1 &1325613903
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +816,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1325613903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.4, y: 53.66, z: 13.25}
+  m_LocalPosition: {x: 26.4, y: 50.945, z: 13.287}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1065137260}
@@ -824,7 +837,7 @@ GameObject:
   - 114: {fileID: 1430238985}
   m_Layer: 0
   m_Name: Left Eye Camera
-  m_TagString: Untagged
+  m_TagString: Portal - Left Eye
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1046,7 +1059,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: dbc4103067467e5468caf94e029334c2, type: 3}
       propertyPath: m_Name
-      value: Portal Geometry
+      value: Portal Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbc4103067467e5468caf94e029334c2, type: 3}
@@ -1148,7 +1161,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1789952496}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17df12781d94dac47aa588688533f477, type: 3}
   m_Name: 

@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PortalStencilEnableMaterial
+  m_Name: PortalStencilEnable
   m_Shader: {fileID: 4800000, guid: bb86325a6690d604294dabcabea3a03a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5

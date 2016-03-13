@@ -12,18 +12,18 @@ public class PlayerMovement : MonoBehaviour
 
 	public bool DebugEnabled = false;
 	
-	public void Awake ()
+	public void Awake()
 	{
 		playerRigidbody = GetComponent<Rigidbody>();
 
 		CurrentGravityAcceleration = Vector3.down;
 	}
 
-	public void Start ()
+	public void Start()
 	{
 	}
 	
-	public void Update ()
+	public void Update()
 	{
 		ApplyLocalGravity();
 
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private Rigidbody playerRigidbody = null;
 
-	private void ApplyLocalGravity ()
+	private void ApplyLocalGravity()
 	{
 		playerRigidbody.AddForce(CurrentGravityAcceleration, ForceMode.Acceleration);
 	}
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 		return desiredBodyOrientation;
 	}
 
-	private void RenderGravityShiftGhost ()
+	private void RenderGravityShiftGhost()
 	{
 		Camera childCamera = GetComponentInChildren<Camera>();
 
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 			Color.blue);
 	}
 
-	private void SnapRotationToGravityReferenceFrame ()
+	private void SnapRotationToGravityReferenceFrame()
 	{
 		CurrentGravityAcceleration = DesiredGravityAcceleration;
 		
